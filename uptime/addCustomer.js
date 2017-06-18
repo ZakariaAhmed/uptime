@@ -2,6 +2,8 @@ $(document).ready(function(){
   $('#cButton').click(function(){
       $('#Material').val(' ');
   });
+
+
 });
 
 function postCustomer()

@@ -1,13 +1,21 @@
+<?php 
+require_once 'Database/config.php';
+$ID  = mysqli_real_escape_string($conn, $_GET['ID']);
+$sql = "SELECT * FROM Customers where customerId = {$ID}";
+$result = mysqli_query($conn, $sql) or die ("Bad query : $sql");
+$row = mysqli_fetch_array($result);
+// 
+$customer = $row['customerName'];
+?>
+
 <?php include 'sharedViews/head.php'; ?>
 <body>
-<?php include 'sharedViews/navbar.php'; ?>
-
-<script src='extras/js/app.js'></script>
-<script src='extras/js/search.js'></script>
-<script src='addCustomer.js'></script>
-<link rel="stylesheet" type="text/css" href="extras/css/app.css">
+<?php include 'sharedViews/navbar.php'; ?>	
 <main>
-	<div class="container">
+<div class="container">
+<div class="row">
+	<h1 class="text-center"><?php echo $customer; ?></h1>
+		<div class="container">
 		<div class="row">
 		<div class="input-group">
   			<span class="input-group-addon glyphicon glyphicon-search" id="sizing-addon2"></span>
@@ -15,14 +23,14 @@
 		</div>		
 	<br />
 	<!-- Add Customer Modal -->
-	<div class="center"><button id="cButton" data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary center-block">Add Customer</button></div>
+	<div class="center"><button id="cButton" data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary center-block">Add URL to <?php echo $customer ?></button></div>
 	<!-- line modal -->
 <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
   <div class="modal-dialog">
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-			<h3 class="modal-title" id="lineModalLabel">Add Customer</h3>
+			<h3 class="modal-title" id="lineModalLabel">Add URL</h3>
 		</div>
 		<div class="modal-body">
 			<!-- Add Customer Content -->
@@ -30,9 +38,10 @@
   				<div class="form-group">
     			<input type="text" class="form-control" name="Mat" id="Material" placeholder="Example Audi">
     			<br />
- 			<input type="Submit" class="btn btn-success" value="Submit" id="matbutton" data-dismiss="modal" onclick="postCustomer()" />
+
+ 					
   			</div>
-			 
+			<input type="Submit" class="btn btn-success" value="Submit" id="matbutton" data-dismiss="modal" onclick="postURL()" /> 
 			</form>
 			
 			</div>
@@ -78,7 +87,8 @@
 		<!-- End of Row -->		
 		</div>
 	</div>
+</div>
+</div>
 </main>
 <?php include 'sharedViews/footer.php'; ?>
 </body>
-</html>

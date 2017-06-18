@@ -10,8 +10,7 @@
   <a class="navbar-brand" href="#"><strong>Resolution Media</strong></a>
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav navbar-left">
-        <li><a href="#">Home</a></li>
-        <li><a href="#customers">Customers</a></li>
+        <li><a href="/uptime/uptime">Home</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <!--<li><a href="#login">Login</a></li> -->
