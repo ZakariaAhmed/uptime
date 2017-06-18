@@ -1,11 +1,10 @@
 <?php include 'sharedViews/head.php'; ?>
+
 <body>
 <?php include 'sharedViews/navbar.php'; ?>
 
-<script src='extras/js/app.js'></script>
-<script src='extras/js/search.js'></script>
-<script src='addCustomer.js'></script>
 <link rel="stylesheet" type="text/css" href="extras/css/app.css">
+<script src='indexapp.js'></script>
 <main>
 	<div class="container">
 		<div class="row">
@@ -26,13 +25,12 @@
 		</div>
 		<div class="modal-body">
 			<!-- Add Customer Content -->
-			<form id="formmatins" method="post" action="addCustomer.php">
+			<form id="customerForm" method="post">
   				<div class="form-group">
-    			<input type="text" class="form-control" name="Mat" id="Material" placeholder="Example Audi">
+    			<input type="text" class="form-control" name="customerName" id="customerName" placeholder="Example Audi">
     			<br />
- 			<input type="Submit" class="btn btn-success" value="Submit" id="matbutton" data-dismiss="modal" onclick="postCustomer()" />
-  			</div>
-			 
+ 				</div>
+ 				<input type="Submit" class="btn btn-success" value="Submit" id="matbutton" data-dismiss="modal"/>
 			</form>
 			
 			</div>
@@ -56,7 +54,7 @@
 		<tbody id="status_text" >
 		<?php 
 		include 'Database/config.php';
-			$sql = "SELECT customerId, customerName FROM customers GROUP BY customerName";
+			$sql = "SELECT customerId, customerName FROM customers";
 			$amountOfUrls = 0;
 			$amountOf202 = 0;
 			$amountOf404 = 0;

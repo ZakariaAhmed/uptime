@@ -1,12 +1,11 @@
 <?php 
 include 'Database/config.php';
+/// ADD'S CUSTOMER AND UPDATES DATABASE TABLE
 
+// WE NEED TO DO SOME CHECKS, SANITIZE URLS ON USERINPUT AND LOWERCASE , 
+// CHECK IF USERINPUT ALREADY EXIST IN THE DATABASE, ETC...
 
-// DO SOME CHECKS, ON USERINPUT AND LOWERCASE, 
-//  IF IT ALREADY EXIST IN THE DATABASE, DONT ADD IT
-
-$cName = $_POST['customer_name'];
-
+$cName = $_POST['customerName'];
 $sql = "INSERT INTO customers (customerName) VALUES('".$cName."')";
 
 	if (mysqli_query($conn, $sql)) {
@@ -14,7 +13,7 @@ $sql = "INSERT INTO customers (customerName) VALUES('".$cName."')";
       }
 
 
- 	$sqli = "SELECT customerId, customerName FROM customers GROUP BY customerName";
+ 	$sqli = "SELECT customerId, customerName FROM customers";
 			$amountOfUrls = 0;
 			$amountOf202 = 0;
 			$amountOf404 = 0;
@@ -29,6 +28,4 @@ $sql = "INSERT INTO customers (customerName) VALUES('".$cName."')";
 				<td>{$amountOf404}</td>
 				</tr>";
 			}
-
-
  ?>

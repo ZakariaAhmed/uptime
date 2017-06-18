@@ -31,9 +31,35 @@ var cronSchedule = [
 	'59 23 28-31 * *',
 	]
 
+for(var i=0; i< arrTime.length;i++)
+{
+  jQuery('<option/>', {
+        value: cronSchedule[i],
+        html: arrTime[i]
+        }).appendTo('#list select'); //appends to select if parent div has id dropdown
+	}
+
+	$('#btnSubmit').click(function(){
+		var values = $('#myForm').serialize();
+		$.ajax({
+			url:"postCustomerData.php",
+			type:"POST",
+			data: values,
+			 success: function (response) {
+			 	// adds php response to the tag with this id. 
+           $('#status_text').html(response); 
+           // resets form
+            $('#customerForm').each(function(){
+          		this.reset();
+          });                 
+		},
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        	}
 
 
+		});
+	});
 
 });
-
 

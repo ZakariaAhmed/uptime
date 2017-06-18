@@ -19,5 +19,7 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
+<script src='./customerURLs.js'></script>
+<script src='extras/js/search.js'></script>
 
 </head>

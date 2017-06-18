@@ -11,6 +11,7 @@ $customer = $row['customerName'];
 <?php include 'sharedViews/head.php'; ?>
 <body>
 <?php include 'sharedViews/navbar.php'; ?>	
+
 <main>
 <div class="container">
 <div class="row">
@@ -34,16 +35,18 @@ $customer = $row['customerName'];
 		</div>
 		<div class="modal-body">
 			<!-- Add Customer Content -->
-			<form id="formmatins" method="post" action="addCustomer.php">
+			<form id="myForm" method="post">
   				<div class="form-group">
-    			<input type="text" class="form-control" name="Mat" id="Material" placeholder="Example Audi">
+    			<input type="text" class="form-control" name="customerURL" id="customerURL" placeholder="Example www.audi.dk">
     			<br />
 
- 					
+ 				 <div class="form-group" id="list">
+			    <label for="selected">Update Status Code</label>
+			    <select class="form-control" name="cronTimer"></select>
+  			</div>		
   			</div>
-			<input type="Submit" class="btn btn-success" value="Submit" id="matbutton" data-dismiss="modal" onclick="postURL()" /> 
+			<input type="Submit" class="btn btn-success" value="Submit" id="btnSubmit" data-dismiss="modal"/> 
 			</form>
-			
 			</div>
 		<div class="modal-footer">
 		
@@ -56,28 +59,26 @@ $customer = $row['customerName'];
 		<table class="table" id="myTable" data-link="row">
 		<thead class="thead-inverse">
 			<tr class="header">
-				<th>Customers</th>
-				<th>URL's</th>
-				<th>Statuscode 200s</th>
-				<th>Statuscode 404s</th>
+				<p id="postData"></p>
+				<th><?php echo $customer; ?> URLs</th>
+				<th>Statuscode 200</th>
+				<th>Statuscode 404</th>
 			</tr>
 		</thead>
 		<tbody id="status_text" >
 		<?php 
 		include 'Database/config.php';
-			$sql = "SELECT customerId, customerName FROM customers GROUP BY customerName";
-			$amountOfUrls = 0;
-			$amountOf202 = 0;
-			$amountOf404 = 0;
+			$sql = "SELECT customers.customername, urlcustomers.urlLink, urlcustomers.urlId FROM customers LEFT join urlcustomers on customers.customerId = urlcustomers.customerId";
 			$result = $conn->query($sql);
 			while ($row = $result->fetch_assoc()) {
-				$url = $row["customerName"];
-				$id = $row["customerId"];
+				$url = $row["urlLink"];
+				$id = $row["urlId"];
+				$urlStatus = $row['urlStatus'];
+				$urlRedirect = $row['urlRedirect'];
 				echo "<tr>
-				<td><a href='customers.php?ID={$id}'>{$url}</a></td>
-				<td>{$amountOfUrls}</td>
-				<td>{$amountOf202}</td>
-				<td>{$amountOf404}</td>
+				<td><a href='autocronurl.php?ID={$id}'>{$url}</a></td>
+				<td>{$urlStatus}</td>
+				<td>{$urlRedirect}</td>
 				</tr>";
 			}
 			?>
